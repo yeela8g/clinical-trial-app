@@ -55,14 +55,23 @@ function AdminDashboard({ userID, handleLogout }) {
             onChange={(e) => setNewUserPhoneNumber(e.target.value)}
             required
           />
-          <input
-            type="date"
-            className="shadow border rounded w-full py-2 px-3 mb-4 text-gray-700"
-            placeholder="תאריך התחלה"
-            value={newUserStartDate}
-            onChange={(e) => setNewUserStartDate(e.target.value)}
-            required
-          />
+         <div className="relative mb-4">
+  <label 
+    htmlFor="startDate"
+    className="block text-gray-700 text-right mb-1"
+  >
+    V1 תאריך התחלה
+  </label>
+  <input
+    id="startDate"
+    type="date"
+    className="shadow border rounded w-full py-2 px-3 text-gray-700"
+    value={newUserStartDate}
+    onChange={(e) => setNewUserStartDate(e.target.value)}
+    required
+  />
+</div>
+
           <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full mb-4">
             הוספה
           </button>
