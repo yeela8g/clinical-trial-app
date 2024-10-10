@@ -58,10 +58,10 @@ function UserDashboard({ userID, handleLogout }) {
       
       <div className="bg-gray-300 p-6 sm:p-8 rounded border border-gray-400 shadow-md w-full max-w-lg mt-16 md:mt-24 lg:mt-32">
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-4 text-blue-900 text-center">
-          {`! ${userID} ברוך הבא נסיין מס`}
+          שלום לך,
         </h1>
         <h2 className="text-lg font-bold mb-2 text-blue-900 text-center">
-          <span className="border-b border-gray-50 border-dashed">: משימות יומיות</span>
+          <span className="border-b border-gray-50 border-dashed">אלו הן המשימות היום:</span>
         </h2>
         <ul className="space-y-3 mb-6 w-full">
           <li className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md flex items-center justify-end gap-2 font-semibold shadow">
