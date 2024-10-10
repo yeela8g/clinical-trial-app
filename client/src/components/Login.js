@@ -43,9 +43,25 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
   autocomplete="username" // Browser will suggest stored usernames
   required
 />
-        <div className="relative flex items-center mb-6">
+ (
+    <div className="relative flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-gray-950 to-blue-600">
+      <div className="absolute top-8">
+        <img src="/logo.webp" alt="logo" width={100} height="auto" className="md:w-32" />
+      </div>
+      
+      <div className="bg-gray-300 p-6 sm:p-8 rounded border border-gray-400 shadow-md w-full max-w-sm">
+        <input
+          className="shadow border text-right rounded w-full py-2 px-3 mb-4 text-gray-700"
+          value={userID} 
+          onChange={(e) => setUserID(e.target.value)} 
+          placeholder="   קוד אישי"
+          autocomplete="username"
+          required
+        />
+        
+        <div className="relative mb-6">
           <input
-            className="shadow border text-right rounded w-full py-2 px-3 text-gray-700 pr-3"
+            className="shadow border text-right rounded w-full py-2 px-3 text-gray-700 pl-10" 
             type={showPassword ? "text" : "password"} 
             value={userPhoneNumber} 
             onChange={(e) => setUserPhoneNumber(e.target.value)} 
@@ -56,7 +72,7 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
           <button 
             type="button" 
             onClick={() => setShowPassword(!showPassword)}
-            className="ml-2 text-sm text-gray-600 hover:text-gray-800"
+            className="absolute inset-y-0 left-0 flex items-center px-3 text-sm text-gray-600 hover:text-gray-800"
           >
             {showPassword ? "הסתר" : "הצג"}
           </button>
