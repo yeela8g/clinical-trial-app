@@ -39,7 +39,7 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
           className="shadow border text-right rounded w-full py-2 px-3 mb-4 text-gray-700"
           value={userID} 
           onChange={(e) => setUserID(e.target.value)} 
-          placeholder="קוד אישי"
+          placeholder="   שינוייייי קוד אישי"
           required
         />
         <input
