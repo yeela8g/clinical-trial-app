@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const customEnv = require("custom-env");
 const twilio = require('twilio');
 
-customEnv.env(process.env.NODE_ENV, "./config");
+// customEnv.env(process.env.NODE_ENV, "./config");
 const client = new twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 
