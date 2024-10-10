@@ -5,7 +5,7 @@ const app = http.createServer(server);
 
 const mongoose = require("mongoose");
 const customEnv = require("custom-env");
-customEnv.env(process.env.NODE_ENV, "./config");
+// customEnv.env(process.env.NODE_ENV, "./config");
 mongoose.connect(process.env.CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
