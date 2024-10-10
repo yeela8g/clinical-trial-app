@@ -26,4 +26,9 @@ const c_is_complete_tasks = async (req, res) => {
     res.json(result);
 }
 
-module.exports = {c_login_user, c_register_user, c_isSurvey, c_update_Complete_Tasks, c_is_complete_tasks};
+const status = (req, res) => {
+    console.log("status is sending 200");
+    res.status(200).json({ status: 'ok' });
+  };
+
+module.exports = {c_login_user, c_register_user, c_isSurvey, c_update_Complete_Tasks, c_is_complete_tasks, status};
