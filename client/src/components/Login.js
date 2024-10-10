@@ -31,7 +31,7 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
   return (
     <div className="relative flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-gray-950 to-blue-600">
       <div className="absolute top-8">
-        <img src="/logo.webp" alt="logo" width={80} height="auto" className="md:w-32" />
+        <img src="/logo.webp" alt="logo" width={100} height="auto" className="md:w-32" />
       </div>
       
       <div className="bg-gray-300 p-6 sm:p-8 rounded border border-gray-400 shadow-md w-full max-w-sm">
