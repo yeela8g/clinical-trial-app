@@ -4,6 +4,8 @@ import { FaCheckCircle, FaTasks } from "react-icons/fa";
 function UserDashboard({ userID, handleLogout }) {
   const [isDone, setIsDone] = useState(null);
   const [isSurvey, setIsSurvey] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   const fetchTasks = async () => {
     //get tasks amount
@@ -20,6 +22,7 @@ function UserDashboard({ userID, handleLogout }) {
     }else{
       alert("could not fetch task status");
     }
+    setIsLoading(false); // Hide loading indicator after fetch completes
   };
 
   useEffect(() => {
@@ -40,6 +43,13 @@ function UserDashboard({ userID, handleLogout }) {
     }
   };
 
+  if(isLoading){
+ return (
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-950 to-blue-600">
+        <p className="text-white text-2xl">Loading...</p>
+      </div>
+    );
+  } else{
   return (
     <div className="relative flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-gray-950 to-blue-600">
       <div className="absolute top-8">
@@ -89,6 +99,8 @@ function UserDashboard({ userID, handleLogout }) {
       </div>
     </div>
   );
+}
+
   
   
 }
