@@ -60,7 +60,7 @@ function AdminDashboard({ userID, handleLogout }) {
     htmlFor="startDate"
     className="block text-gray-700 text-right mb-1"
   >
-    V1 תאריך התחלה
+              :V1 תאריך התחלה
   </label>
   <input
     id="startDate"
