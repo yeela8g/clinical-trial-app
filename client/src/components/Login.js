@@ -47,7 +47,6 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
           value={userPhoneNumber} 
           onChange={(e) => setUserPhoneNumber(e.target.value)} 
           placeholder="מס' טלפון (ללא מקפים)"
-          type='password'
           required
         />
         <button
