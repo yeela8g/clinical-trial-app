@@ -3,11 +3,7 @@ const cron = require("node-cron");
 const nodemailer = require('nodemailer');
 const customEnv = require("custom-env");
 const twilio = require('twilio');
-const http = require('http');
 
-setInterval(() => {
-    http.get('https://clinical-trial-app.onrender.com/');
-}, 300000); // Pings every 5 minutes
 
 // customEnv.env(process.env.NODE_ENV, "./config");
 const client = new twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
