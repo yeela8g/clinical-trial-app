@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FaCheckCircle, FaTasks } from "react-icons/fa";
 
 function UserDashboard({ userID, handleLogout }) {
-  const [isDone, setIsDone] = useState(false);
-  const [isSurvey, setIsSurvey] = useState(false);
+  const [isDone, setIsDone] = useState(null);
+  const [isSurvey, setIsSurvey] = useState(null);
 
   const fetchTasks = async () => {
     //get tasks amount
