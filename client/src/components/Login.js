@@ -35,20 +35,22 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
       </div>
       
       <div className="bg-gray-300 p-6 sm:p-8 rounded border border-gray-400 shadow-md w-full max-w-sm">
-        <input
-          className="shadow border text-right rounded w-full py-2 px-3 mb-4 text-gray-700"
-          value={userID} 
-          onChange={(e) => setUserID(e.target.value)} 
-          placeholder="   קוד אישי"
-          required
-        />
-        <input
-          className="shadow border text-right rounded w-full py-2 px-3 mb-6 text-gray-700"
-          value={userPhoneNumber} 
-          onChange={(e) => setUserPhoneNumber(e.target.value)} 
-          placeholder="מס' טלפון (ללא מקפים)"
-          required
-        />
+       <input
+  className="shadow border text-right rounded w-full py-2 px-3 mb-4 text-gray-700"
+  value={userID} 
+  onChange={(e) => setUserID(e.target.value)} 
+  placeholder="   קוד אישי"
+  autocomplete="username" // Browser will suggest stored usernames
+  required
+/>
+<input
+  className="shadow border text-right rounded w-full py-2 px-3 mb-6 text-gray-700"
+  value={userPhoneNumber} 
+  onChange={(e) => setUserPhoneNumber(e.target.value)} 
+  placeholder="מס' טלפון (ללא מקפים)"
+  autocomplete="tel" // Browser will suggest stored phone numbers
+  required
+/>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
           onClick={handleLogin}
