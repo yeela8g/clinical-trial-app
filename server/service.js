@@ -95,7 +95,7 @@ const sendWhatsAppReminder = async (user) => {
     await client.messages.create({
       body: `שלום!
 תזכורת קטנה: יש לסמן באפליקציה את השלמת כל המטלות להיום: נטילת התוסף ואם נדרש מילוי שאלון שבועי.
-כניסה לאפליקציה: <<לינק>>
+כניסה לאפליקציה: https://clinical-trial-app-phi.vercel.app/
 
 תודה על ההשתתפות וההקפדה!
 
