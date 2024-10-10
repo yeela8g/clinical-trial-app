@@ -45,7 +45,7 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
 />
         <div className="relative mb-6">
           <input
-            className="shadow border text-right rounded w-full py-2 px-3 text-gray-700 pr-10"
+            className="shadow border text-right rounded w-full py-2 px-3 text-gray-700 pr-16"
             type={showPassword ? "text" : "password"} 
             value={userPhoneNumber} 
             onChange={(e) => setUserPhoneNumber(e.target.value)} 
@@ -56,9 +56,9 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
           <button 
             type="button" 
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute inset-y-0 right-0 flex items-center px-3 text-sm text-gray-600 hover:text-gray-800"
+            className="absolute inset-y-0 right-0 flex items-center px-3 text-sm text-gray-600 hover:text-gray-800 mr-2"
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? "הסתר" : "הצג"}
           </button>
         </div>
         <button
