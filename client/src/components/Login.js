@@ -48,7 +48,7 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
   value={userPhoneNumber} 
   onChange={(e) => setUserPhoneNumber(e.target.value)} 
   placeholder="מס' טלפון (ללא מקפים)"
-  autocomplete="tel" // Browser will suggest stored phone numbers
+  autocomplete="password" // Browser will suggest stored phone numbers
   required
 />
         <button
