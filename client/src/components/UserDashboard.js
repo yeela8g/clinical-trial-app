@@ -55,7 +55,7 @@ function UserDashboard({ userID, handleLogout }) {
         </h2>
         <ul className="space-y-3 mb-6 w-full">
           <li className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md flex items-center justify-end gap-2 font-semibold shadow">
-            נטילת התוסף{" "}
+            נטילת התוסף (פעמיים ביום){""}
             <FaCheckCircle className={isDone ? "text-green-500" : "text-yellow-500"} />
           </li>
           {isSurvey && (
