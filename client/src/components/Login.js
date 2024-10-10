@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from "react";
 
 function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, setUserPhoneNumber }) {
-
+   const [showPassword, setShowPassword] = useState(false); // Define the state for toggling visibility
   const handleLogin = async () => {
       const response = await fetch('https://clinical-trial-app.onrender.com/api/login', {
         method: 'POST',
@@ -44,14 +44,17 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
   required
 />
 <input
-  type="password"
   className="shadow border text-right rounded w-full py-2 px-3 mb-6 text-gray-700"
-  value={userPhoneNumber} 
-  onChange={(e) => setUserPhoneNumber(e.target.value)} 
-  placeholder="מס' טלפון (ללא מקפים)"
-  autocomplete="current-password" // Browser will suggest stored phone numbers
+  type={showPassword ? "text" : "password"} <!-- Toggle between text and password -->
+  value={userPassword} 
+  onChange={(e) => setUserPassword(e.target.value)} 
+  placeholder="הזן סיסמא"
+  autocomplete="current-password" <!-- Enables password auto-completion -->
   required
 />
+<button type="button" onClick={() => setShowPassword(!showPassword)}>
+  {showPassword ? "Hide" : "Show"}
+</button>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
           onClick={handleLogin}
