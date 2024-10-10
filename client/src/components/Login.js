@@ -43,18 +43,24 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
   autocomplete="username" // Browser will suggest stored usernames
   required
 />
-<input
-  className="shadow border text-right rounded w-full py-2 px-3 mb-6 text-gray-700"
-  type={showPassword ? "text" : "password"} 
-  value={userPhoneNumber} 
-  onChange={(e) => setUserPhoneNumber(e.target.value)} 
-  placeholder="הזן סיסמא"
-  autocomplete="current-password" 
-  required
-/>
-<button type="button" onClick={() => setShowPassword(!showPassword)}>
-  {showPassword ? "Hide" : "Show"}
-</button>
+        <div className="relative mb-6">
+          <input
+            className="shadow border text-right rounded w-full py-2 px-3 text-gray-700 pr-10"
+            type={showPassword ? "text" : "password"} 
+            value={userPhoneNumber} 
+            onChange={(e) => setUserPhoneNumber(e.target.value)} 
+            placeholder="הזן סיסמא"
+            autocomplete="current-password"
+            required
+          />
+          <button 
+            type="button" 
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute inset-y-0 right-0 flex items-center px-3 text-sm text-gray-600 hover:text-gray-800"
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
           onClick={handleLogin}
