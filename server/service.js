@@ -94,13 +94,7 @@ const sendWhatsAppReminder = async (user) => {
   try {
     const formattedPhoneNumber = formatPhoneNumberToE164(user.phoneNumber);
     await client.messages.create({
-      body: `שלום!
-תזכורת קטנה: יש לסמן באפליקציה את השלמת כל המטלות להיום: נטילת התוסף ואם נדרש מילוי שאלון שבועי.
-כניסה לאפליקציה: https://clinical-trial-app-phi.vercel.app/
-
-תודה על ההשתתפות וההקפדה!
-
-* צ’אט זה הינו להודעות אוטומטיות בלבד. לשאלות ובירורים יש לפנות ישירות למתאמת המחקר*`,
+      messagingServiceSid: 'HX847968bdf552e3bd1d54e58eccf0803b',
       from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
       to: `whatsapp:${formattedPhoneNumber}`
     });
