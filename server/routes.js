@@ -8,6 +8,9 @@ router.route('/register').post(c_register_user);
 router.route('/tasks/:userID').get(c_isSurvey);
 router.route(`/completeTasks/:userID`).put(c_update_Complete_Tasks);
 router.route(`/completeTasks/:userID`).get(c_is_complete_tasks);
+router.route('/status', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 
 module.exports = router;
