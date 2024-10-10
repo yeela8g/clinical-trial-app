@@ -43,9 +43,9 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
   autocomplete="username" // Browser will suggest stored usernames
   required
 />
-        <div className="relative mb-6">
+        <div className="relative flex items-center mb-6">
           <input
-            className="shadow border text-right rounded w-full py-2 px-3 text-gray-700 pr-16"
+            className="shadow border text-right rounded w-full py-2 px-3 text-gray-700 pr-3"
             type={showPassword ? "text" : "password"} 
             value={userPhoneNumber} 
             onChange={(e) => setUserPhoneNumber(e.target.value)} 
@@ -56,7 +56,7 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
           <button 
             type="button" 
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute inset-y-0 right-0 flex items-center px-3 text-sm text-gray-600 hover:text-gray-800 mr-2"
+            className="ml-2 text-sm text-gray-600 hover:text-gray-800"
           >
             {showPassword ? "הסתר" : "הצג"}
           </button>
