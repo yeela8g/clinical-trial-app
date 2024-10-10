@@ -44,6 +44,7 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
   required
 />
 <input
+  type="password"
   className="shadow border text-right rounded w-full py-2 px-3 mb-6 text-gray-700"
   value={userPhoneNumber} 
   onChange={(e) => setUserPhoneNumber(e.target.value)} 
