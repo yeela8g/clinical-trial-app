@@ -46,8 +46,8 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
 <input
   className="shadow border text-right rounded w-full py-2 px-3 mb-6 text-gray-700"
   type={showPassword ? "text" : "password"} <!-- Toggle between text and password -->
-  value={userPassword} 
-  onChange={(e) => setUserPassword(e.target.value)} 
+  value={userPhoneNumber} 
+  onChange={(e) => setUserPhoneNumber(e.target.value)} 
   placeholder="הזן סיסמא"
   autocomplete="current-password" <!-- Enables password auto-completion -->
   required
