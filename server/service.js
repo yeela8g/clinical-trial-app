@@ -116,8 +116,8 @@ const sendWhatsAppReminders = async () => {
   }
 };
 
-// Schedule the task at 13:34 every day, Israel time
-cron.schedule("15 14 * * *", sendWhatsAppReminders, {
+// Schedule the task every day, Israel time
+cron.schedule("22 14 * * *", sendWhatsAppReminders, {
   timezone: "Asia/Jerusalem"
 });
 
