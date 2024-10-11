@@ -106,7 +106,7 @@ const sendWhatsAppReminder = async (user) => {
 
 
 
-cron.schedule('21 13 * * *', async () => {
+cron.schedule('30 10 * * *', async () => {
   try {
     const users = await Experimenter.find({ completedTasks: false });
     for (const user of users) {
