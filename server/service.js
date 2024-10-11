@@ -1,5 +1,5 @@
 const { Experimenter } = require("./model.js");
-const cron = require('node-cron-timezone');
+const cron = require('node-cron');
 const nodemailer = require('nodemailer');
 const customEnv = require("custom-env");
 const twilio = require('twilio');
