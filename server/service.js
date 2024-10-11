@@ -127,7 +127,7 @@ const s_login_user = async (userID, phoneNumber) => {
     const startDate = new Date(user.startDate);
 
     // If current date is before startDate, deny login
-    if (localToday < startDate) {
+    if (today < startDate) {
       return {
         status: 203,
         message: "You cannot log in before your start date.",
