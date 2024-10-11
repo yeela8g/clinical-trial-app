@@ -27,7 +27,6 @@ const c_is_complete_tasks = async (req, res) => {
 }
 
 const status = (req, res) => {
-    console.log("status is sending 200");
     res.status(200).json({ status: 'ok' });
   };
 
