@@ -1,8 +1,9 @@
 const { Experimenter } = require("./model.js");
-const cron = require("node-cron");
+const cron = require('node-cron-timezone');
 const nodemailer = require('nodemailer');
 const customEnv = require("custom-env");
 const twilio = require('twilio');
+const moment = require('moment-timezone');
 
 
 // customEnv.env(process.env.NODE_ENV, "./config");
@@ -41,43 +42,43 @@ const sendEmailReport = async (users) => {
 };
 
 // Schedule a task to reset completedTasks at midnight every day
-cron.schedule("0 0 * * *", async () => {
+cron.schedule("0 0 * * *", { timezone: "Asia/Jerusalem" }, async () => {
   try {
+    // Reset completedTasks for all users
+    const users = await Experimenter.find({});
+    const today = moment.tz("Asia/Jerusalem").toDate(); // Today's date in Israel time
 
-  // Reset completedTasks for all users
-  const users = await Experimenter.find({});
-  const today = new Date();
+    // Filter out users who have been in the trial for more than 8 weeks (56 days)
+    const usersToKeep = [];
+    const usersToRemove = [];
 
-  // Filter out users who have been in the trial for more than 8 weeks (56 days)
-  const usersToKeep = [];
-  const usersToRemove = [];
+    users.forEach((user) => {
+      const startDate = new Date(user.startDate);
+      const timeDiff = today - startDate;
+      const daysInTrial = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
 
-  users.forEach(user => {
-    const startDate = new Date(user.startDate);
-    const timeDiff = today - startDate;
-    const daysInTrial = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+      if (daysInTrial < 56) {
+        usersToKeep.push(user); // Keep users who have been in the trial for less than 8 weeks
+      } else {
+        usersToRemove.push(user); // Mark users to be removed
+      }
+    });
 
-    if (daysInTrial < 56) {
-      usersToKeep.push(user); // Keep users who have been in the trial for less than 8 weeks
-    } else {
-      usersToRemove.push(user); // Mark users to be removed
-    }
-  });
+    // Send email report
+    await sendEmailReport(usersToKeep);
 
-  // Send email report
-  await sendEmailReport(usersToKeep);
+    // Remove users who have exceeded 8 weeks
+    await Experimenter.deleteMany({
+      _id: { $in: usersToRemove.map((user) => user._id) },
+    });
 
-  // Remove users who have exceeded 8 weeks
-  await Experimenter.deleteMany({
-    _id: { $in: usersToRemove.map(user => user._id) }
-  });
+    console.log(
+      `Removed ${usersToRemove.length} users who exceeded 8 weeks from the database.`
+    );
 
-  console.log(`Removed ${usersToRemove.length} users who exceeded 8 weeks from the database.`);
-
-  await Experimenter.updateMany({}, { $set: { completedTasks: false } });
-  }catch (error){
-    console.error('Error resetting completedTasks or sending email:', error);
-
+    await Experimenter.updateMany({}, { $set: { completedTasks: false } });
+  } catch (error) {
+    console.error("Error resetting completedTasks or sending email:", error);
   }
 });
 
@@ -106,7 +107,7 @@ const sendWhatsAppReminder = async (user) => {
 
 
 
-cron.schedule('30 10 * * *', async () => {
+cron.schedule('30 10 * * *', { timezone: "Asia/Jerusalem" }, async () => {
   try {
     const users = await Experimenter.find({ completedTasks: false });
     for (const user of users) {
@@ -118,7 +119,6 @@ cron.schedule('30 10 * * *', async () => {
   }
 });
 
-
 const s_login_user = async (userID, phoneNumber) => {
   if (userID === "admin" && phoneNumber === "admin123") {
     return { userID, phoneNumber, isAdmin: true, status: 200 };
@@ -126,10 +126,7 @@ const s_login_user = async (userID, phoneNumber) => {
 
   let user = await Experimenter.findOne({ userID, phoneNumber });
   if (user) {
-    const today = new Date();
-    const offset = today.getTimezoneOffset();
-    const localToday = new Date(today.getTime() - offset * 60000); // Adjust to local time
-
+    const today = moment.tz("Asia/Jerusalem").toDate();
     const startDate = new Date(user.startDate);
 
     // If current date is before startDate, deny login
@@ -164,21 +161,21 @@ const s_register_user = async (userID, phoneNumber, startDate) => {
   if (existingUser) {
     return { status: 203 };
   }
-  const st_date = new Date(startDate);
+
+  const st_date = moment.tz(startDate, "Asia/Jerusalem").toDate();
   const newUser = new Experimenter({ userID, phoneNumber, startDate: st_date });
   await newUser.save();
   return { status: 200 };
 };
 
+
 const s_isSurvey = async (userID) => {
   const user = await Experimenter.findOne({ userID });
-  const today = new Date();
-  const offset = today.getTimezoneOffset();
+  const today = moment.tz("Asia/Jerusalem").toDate();
 
-  const localToday = new Date(today.getTime() - offset * 60000); // Adjust to local time
-  const localStart = new Date(user.startDate);
+  const start = new Date(user.startDate);
 
-  const dayDiff = Math.floor((localToday - localStart) / (1000 * 60 * 60 * 24)); // Difference in days
+  const dayDiff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
 
   const needsSurvey = dayDiff % 7 === 0 && dayDiff !== 0; // Every 7 days, starting on day 8
   return { isSurvey: needsSurvey };
