@@ -98,9 +98,9 @@ const sendWhatsAppReminder = async (user) => {
       from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
       to: `whatsapp:${formattedPhoneNumber}`
     });
-    console.log(`WhatsApp reminder sent to ${user.userID}`);
+    console.log(`WhatsApp reminder sent to ${formattedPhoneNumber}`);
   } catch (error) {
-    console.error(`Failed to send reminder to ${user.userID}:`, error);
+    console.error(`Failed to send reminder to ${formattedPhoneNumber}:`, error);
   }
 };
 
