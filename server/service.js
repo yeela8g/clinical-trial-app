@@ -106,17 +106,17 @@ const sendWhatsAppReminder = async (user) => {
 
 
 
-// cron.schedule('0 21 * * *', async () => {
-//   try {
-//     const users = await Experimenter.find({ completedTasks: false });
-//     for (const user of users) {
-//       await sendWhatsAppReminder(user);
-//     }
-//     console.log(`Reminders sent to users who haven't completed tasks`);
-//   } catch (error) {
-//     console.error('Error sending WhatsApp reminders:', error);
-//   }
-// });
+cron.schedule('52 12 * * *', async () => {
+  try {
+    const users = await Experimenter.find({ completedTasks: false });
+    for (const user of users) {
+      await sendWhatsAppReminder(user);
+    }
+    console.log(`Reminders sent to users who haven't completed tasks`);
+  } catch (error) {
+    console.error('Error sending WhatsApp reminders:', error);
+  }
+});
 
 
 const s_login_user = async (userID, phoneNumber) => {
