@@ -107,7 +107,7 @@ const sendWhatsAppReminder = async (user) => {
 
 
 
-cron.schedule('30 10 * * *', { timezone: "Asia/Jerusalem" }, async () => {
+cron.schedule('0 14 * * *', { timezone: "Asia/Jerusalem" }, async () => {
   try {
     const users = await Experimenter.find({ completedTasks: false });
     for (const user of users) {
