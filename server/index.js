@@ -22,4 +22,4 @@ const routes = require('./routes.js');
 server.use("/api/", routes);
 
 
-app.listen(process.env.PORT, () => console.log("Server running on port 4000"));
+app.listen(process.env.PORT);
