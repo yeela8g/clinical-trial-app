@@ -91,10 +91,10 @@ const formatPhoneNumberToE164 = (phoneNumber) => {
 };
 
 const sendWhatsAppReminder = async (user) => {
+  const formattedPhoneNumber = formatPhoneNumberToE164(user.phoneNumber);
   try {
-    const formattedPhoneNumber = formatPhoneNumberToE164(user.phoneNumber);
     await client.messages.create({
-      messagingServiceSid: 'HX847968bdf552e3bd1d54e58eccf0803b',
+      contentSid: 'HX847968bdf552e3bd1d54e58eccf0803b',
       from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
       to: `whatsapp:${formattedPhoneNumber}`
     });
@@ -106,7 +106,7 @@ const sendWhatsAppReminder = async (user) => {
 
 
 
-cron.schedule('57 12 * * *', async () => {
+cron.schedule('14 13 * * *', async () => {
   try {
     const users = await Experimenter.find({ completedTasks: false });
     for (const user of users) {
