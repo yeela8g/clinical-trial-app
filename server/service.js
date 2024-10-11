@@ -41,45 +41,42 @@ const sendEmailReport = async (users) => {
   console.log('Email report sent successfully');
 };
 
-// Schedule a task to reset completedTasks at midnight every day
-cron.schedule("0 0 * * *", { timezone: "Asia/Jerusalem" }, async () => {
+const resetCompletedTasks = async () => {
   try {
-    // Reset completedTasks for all users
     const users = await Experimenter.find({});
-    const today = moment.tz("Asia/Jerusalem").toDate(); // Today's date in Israel time
+    const today = moment.tz("Asia/Jerusalem").toDate();
 
-    // Filter out users who have been in the trial for more than 8 weeks (56 days)
     const usersToKeep = [];
     const usersToRemove = [];
 
-    users.forEach((user) => {
+    users.forEach(user => {
       const startDate = new Date(user.startDate);
       const timeDiff = today - startDate;
-      const daysInTrial = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+      const daysInTrial = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
       if (daysInTrial < 56) {
-        usersToKeep.push(user); // Keep users who have been in the trial for less than 8 weeks
+        usersToKeep.push(user);
       } else {
-        usersToRemove.push(user); // Mark users to be removed
+        usersToRemove.push(user);
       }
     });
 
-    // Send email report
     await sendEmailReport(usersToKeep);
 
-    // Remove users who have exceeded 8 weeks
     await Experimenter.deleteMany({
-      _id: { $in: usersToRemove.map((user) => user._id) },
+      _id: { $in: usersToRemove.map(user => user._id) }
     });
 
-    console.log(
-      `Removed ${usersToRemove.length} users who exceeded 8 weeks from the database.`
-    );
-
+    console.log(`Removed ${usersToRemove.length} users who exceeded 8 weeks from the database.`);
     await Experimenter.updateMany({}, { $set: { completedTasks: false } });
   } catch (error) {
-    console.error("Error resetting completedTasks or sending email:", error);
+    console.error('Error resetting completedTasks or sending email:', error);
   }
+};
+
+// Use cron to schedule the task at midnight every day, Israel time
+cron.schedule("0 0 * * *", resetCompletedTasks, {
+  timezone: "Asia/Jerusalem"
 });
 
 const formatPhoneNumberToE164 = (phoneNumber) => {
@@ -106,8 +103,8 @@ const sendWhatsAppReminder = async (user) => {
 };
 
 
-
-cron.schedule('0 14 * * *', { timezone: "Asia/Jerusalem" }, async () => {
+// Define the function for sending WhatsApp reminders
+const sendWhatsAppReminders = async () => {
   try {
     const users = await Experimenter.find({ completedTasks: false });
     for (const user of users) {
@@ -115,8 +112,13 @@ cron.schedule('0 14 * * *', { timezone: "Asia/Jerusalem" }, async () => {
     }
     console.log(`Reminders sent to users who haven't completed tasks`);
   } catch (error) {
-    console.error('Error sending WhatsApp reminders:', error);
+    console.error("Error sending WhatsApp reminders:", error);
   }
+};
+
+// Schedule the task at 13:34 every day, Israel time
+cron.schedule("15 14 * * *", sendWhatsAppReminders, {
+  timezone: "Asia/Jerusalem"
 });
 
 const s_login_user = async (userID, phoneNumber) => {
