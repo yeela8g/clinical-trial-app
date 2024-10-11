@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const moment = require('moment-timezone');
 const Schema = mongoose.Schema;
 
 const Experimenter = new Schema({
@@ -18,9 +17,7 @@ const Experimenter = new Schema({
   },
  createdAt: {
     type: Date,
-    default: function () {
-      return moment.tz("Asia/Jerusalem").toDate(); // Returns time adjusted to Israel timezone
-    },
+    default: Date.now,
   },
   completedTasks: {
     type: Boolean,
