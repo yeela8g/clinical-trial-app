@@ -3,7 +3,6 @@ const cron = require('node-cron');
 const nodemailer = require('nodemailer');
 const customEnv = require("custom-env");
 const twilio = require('twilio');
-const moment = require('moment-timezone');
 
 
 // customEnv.env(process.env.NODE_ENV, "./config");
@@ -44,7 +43,7 @@ const sendEmailReport = async (users) => {
 const resetCompletedTasks = async () => {
   try {
     const users = await Experimenter.find({});
-    const today = moment.tz("Asia/Jerusalem").toDate();
+    const today = new Date(); // UTC time
 
     const usersToKeep = [];
     const usersToRemove = [];
@@ -74,10 +73,8 @@ const resetCompletedTasks = async () => {
   }
 };
 
-// Use cron to schedule the task at midnight every day, Israel time
-cron.schedule("0 0 * * *", resetCompletedTasks, {
-  timezone: "Asia/Jerusalem"
-});
+cron.schedule("0 22 * * *", resetCompletedTasks);
+
 
 const formatPhoneNumberToE164 = (phoneNumber) => {
   // Assuming all phone numbers are Israeli numbers starting with 0
@@ -116,10 +113,8 @@ const sendWhatsAppReminders = async () => {
   }
 };
 
-// Schedule the task every day, Israel time
-cron.schedule("22 14 * * *", sendWhatsAppReminders, {
-  timezone: "Asia/Jerusalem"
-});
+cron.schedule("0 12 * * *", sendWhatsAppReminders);
+
 
 const s_login_user = async (userID, phoneNumber) => {
   if (userID === "admin" && phoneNumber === "admin123") {
@@ -128,7 +123,7 @@ const s_login_user = async (userID, phoneNumber) => {
 
   let user = await Experimenter.findOne({ userID, phoneNumber });
   if (user) {
-    const today = moment.tz("Asia/Jerusalem").toDate();
+    const today = new Date();
     const startDate = new Date(user.startDate);
 
     // If current date is before startDate, deny login
@@ -164,7 +159,7 @@ const s_register_user = async (userID, phoneNumber, startDate) => {
     return { status: 203 };
   }
 
-  const st_date = moment.tz(startDate, "Asia/Jerusalem").toDate();
+  const st_date = new Date(startDate);
   const newUser = new Experimenter({ userID, phoneNumber, startDate: st_date });
   await newUser.save();
   return { status: 200 };
@@ -173,8 +168,7 @@ const s_register_user = async (userID, phoneNumber, startDate) => {
 
 const s_isSurvey = async (userID) => {
   const user = await Experimenter.findOne({ userID });
-  const today = moment.tz("Asia/Jerusalem").toDate();
-
+  const today = new Date();
   const start = new Date(user.startDate);
 
   const dayDiff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
