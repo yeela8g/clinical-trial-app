@@ -32,7 +32,7 @@ const sendEmailReport = async (users) => {
 
   // Send the email
   await transporter.sendMail({
-    to:  `${ process.env.email }`, // Recipient address
+    to:  `${ process.env.recipient }`, // Recipient address
     subject: 'Daily Tasks Completion Report', // Subject line
     text: `Daily Report of Tasks Completion:\n\n${emailContent}`, // Plain text body
   });
@@ -73,7 +73,7 @@ const resetCompletedTasks = async () => {
   }
 };
 
-cron.schedule("56 12 * * *", resetCompletedTasks);
+cron.schedule("18 13 * * *", resetCompletedTasks);
 
 
 const formatPhoneNumberToE164 = (phoneNumber) => {
