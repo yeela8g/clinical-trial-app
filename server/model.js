@@ -15,14 +15,10 @@ const Experimenter = new Schema({
     type: Date,
     required: true,
   },
-  createdAt: {
+ createdAt: {
     type: Date,
     default: function () {
-      //adjustment to Israel clock
-      const now = new Date();
-      const offset = now.getTimezoneOffset();
-      const localTime = new Date(now.getTime() - offset * 60000); // Adjust for local time
-      return localTime;
+      return moment.tz("Asia/Jerusalem").toDate(); // Returns time adjusted to Israel timezone
     },
   },
   completedTasks: {
