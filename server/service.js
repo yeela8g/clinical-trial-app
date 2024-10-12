@@ -113,7 +113,7 @@ const sendWhatsAppReminders = async () => {
   }
 };
 
-cron.schedule("35 17 * * *", sendWhatsAppReminders);
+// cron.schedule("35 17 * * *", sendWhatsAppReminders);
 
 
 const s_login_user = async (userID, phoneNumber) => {
