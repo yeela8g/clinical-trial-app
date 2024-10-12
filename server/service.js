@@ -73,7 +73,7 @@ const resetCompletedTasks = async () => {
   }
 };
 
-cron.schedule("26 13 * * *", resetCompletedTasks);
+// cron.schedule("26 13 * * *", resetCompletedTasks);
 
 
 const formatPhoneNumberToE164 = (phoneNumber) => {
@@ -113,7 +113,7 @@ const sendWhatsAppReminders = async () => {
   }
 };
 
-cron.schedule("12 12 * * *", sendWhatsAppReminders);
+cron.schedule("35 17 * * *", sendWhatsAppReminders);
 
 
 const s_login_user = async (userID, phoneNumber) => {
