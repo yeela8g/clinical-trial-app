@@ -6,7 +6,7 @@ const c_login_user = async (req, res) => {
 };
 
 const c_register_user = async (req, res) => {
-    const result = await s_register_user(req.body.userID, req.body.phoneNumber, req.body.startDate);
+    const result = await s_register_user(req.body.userID, req.body.phoneNumber, req.body.startDate, req.body.protocolType);
     res.sendStatus(result.status);
 };
 
