@@ -89,7 +89,7 @@ const sendWhatsAppReminder = async (user) => {
   const formattedPhoneNumber = formatPhoneNumberToE164(user.phoneNumber);
   try {
     await client.messages.create({
-      contentSid: 'HX847968bdf552e3bd1d54e58eccf0803b',
+      contentSid: 'HX13b6c7915ec4d53c4f9b160757962894',
       from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
       to: `whatsapp:${formattedPhoneNumber}`
     });
@@ -113,7 +113,7 @@ const sendWhatsAppReminders = async () => {
   }
 };
 
-// cron.schedule("35 17 * * *", sendWhatsAppReminders);
+// cron.schedule("0 19 * * *", sendWhatsAppReminders);
 
 
 const s_login_user = async (userID, phoneNumber) => {
