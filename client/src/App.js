@@ -8,6 +8,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false); // Track if the user is an admin
   const [userID, setUserID] = useState(''); // Store logged-in userID
   const [userPhoneNumber, setUserPhoneNumber] = useState('');
+  const [protocolType, setProtocolType] = useState(""); // state עבור סוג הפרוטוקול
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -19,11 +20,11 @@ function App() {
   return (
     <div>
       {!isLoggedIn ? (
-        <Login setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} userID={userID} setUserID={setUserID} userPhoneNumber={userPhoneNumber} setUserPhoneNumber={setUserPhoneNumber} />
+        <Login setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} userID={userID} setUserID={setUserID} userPhoneNumber={userPhoneNumber} setUserPhoneNumber={setUserPhoneNumber} setProtocolType = {setProtocolType} />
       ) : isAdmin ? (
         <AdminDashboard userID={userID} handleLogout={handleLogout} />
       ) : (
-        <UserDashboard userID={userID} userNumber={userPhoneNumber} handleLogout={handleLogout} />
+        <UserDashboard userID={userID} userNumber={userPhoneNumber} handleLogout={handleLogout} protocolType={protocolType} />
       )}
     </div>
   );
