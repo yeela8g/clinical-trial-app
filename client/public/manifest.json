@@ -2,6 +2,16 @@
   "short_name": "exosomm clinical trial",
   "name": "exosomm",
   "icons": [
+ {
+      "src": "logo.webp",
+      "type": "image/webp",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo.webp",
+      "type": "image/webp",
+      "sizes": "512x512"
+    },
    {
       "src": "logo.png",
       "sizes": "192x192",
