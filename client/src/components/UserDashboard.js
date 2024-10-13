@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FaCheckCircle, FaTasks } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 
-function UserDashboard({ userID, handleLogout }) {
+function UserDashboard({ userID, handleLogout, protocolType }) {
   const [isDone, setIsDone] = useState(null);
   const [isSurvey, setIsSurvey] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const surveyLink = protocolType === "safety" ? "https://docs.google.com/forms/d/e/1FAIpQLSdpC7rSm3bRhv57bN_N4dzck3c8Y_moepKsDa2h_Ydvj2H9Vg/viewform" : "https://forms.gle/yZFNThPASEWVLSN9A";
 
   const fetchTasks = async () => {
     //get tasks amount
@@ -51,28 +52,29 @@ function UserDashboard({ userID, handleLogout }) {
     );
   } else{
   return (
+   
     <div className="relative flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-gray-950 to-blue-600">
       <div className="absolute top-8">
-        <img src="/logo.webp" alt="logo" width={100} height="auto" className="md:w-32" />
+        <img src="/logo.webp" alt="logo" width={80} height="auto" className="md:w-32" />
       </div>
       
       <div className="bg-gray-300 p-6 sm:p-8 rounded border border-gray-400 shadow-md w-full max-w-lg mt-16 md:mt-24 lg:mt-32">
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-4 text-blue-900 text-center">
-          ,שלום לך
+          {`! ${userID} ברוך הבא נסיין מס`}
         </h1>
         <h2 className="text-lg font-bold mb-2 text-blue-900 text-center">
-          <span className="border-b border-gray-50 border-dashed">:אלו הן המשימות להיום</span>
+          <span className="border-b border-gray-50 border-dashed">: משימות יומיות</span>
         </h2>
         <ul className="space-y-3 mb-6 w-full">
           <li className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md flex items-center justify-end gap-2 font-semibold shadow">
-            נטילת התוסף (פעמיים ביום){""}
+            נטילת התוסף{" "}
             <FaCheckCircle className={isDone ? "text-green-500" : "text-yellow-500"} />
           </li>
           {isSurvey && (
             <li
               className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md flex items-center justify-end gap-2 font-semibold shadow cursor-pointer hover:border-b-2 hover:border-blue-500 transition-all duration-300"
-              onClick={() => window.open("https://forms.gle/yZFNThPASEWVLSN9A", "_blank")}
-            >
+              onClick={() => window.open(surveyLink, "_blank")}
+              >
               השלמת סקר שבועי (לחץ/י){" "}
               <FaCheckCircle className={isDone ? "text-green-500" : "text-yellow-500"} />
             </li>
