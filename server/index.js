@@ -21,5 +21,6 @@ server.use(cors());
 const routes = require('./routes.js');
 server.use("/api/", routes);
 
+server.use(express.static(path.join(__dirname, "public")));
 
 app.listen(process.env.PORT);
