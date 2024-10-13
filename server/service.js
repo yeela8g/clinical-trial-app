@@ -119,7 +119,7 @@ const sendWhatsAppReminders = async () => {
 
 
 const s_login_user = async (userID, phoneNumber) => {
-  if (userID === "admin" && phoneNumber === "admin123") {
+  if (userID === process.env.admin && phoneNumber === process.env.adminPassword) {
     return { userID, phoneNumber, isAdmin: true, status: 200 };
   }
 
