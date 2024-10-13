@@ -52,8 +52,10 @@ const resetCompletedTasks = async () => {
       const startDate = new Date(user.startDate);
       const timeDiff = today - startDate;
       const daysInTrial = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const maxDays = user.protocolType === "safety" ? 28 : 56;
 
-      if (daysInTrial < 56) {
+
+      if (daysInTrial < maxDays) {
         usersToKeep.push(user);
       } else {
         usersToRemove.push(user);
@@ -140,7 +142,7 @@ const s_login_user = async (userID, phoneNumber) => {
   } else return { status: 204, message: "no user was found" };
 };
 
-const s_register_user = async (userID, phoneNumber, startDate) => {
+const s_register_user = async (userID, phoneNumber, startDate, protocolType) => {
   const phoneNumberRegex =
     /^[+]?([0-9]{1,3})?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,4}[-\s.]?[0-9]{1,4}[-\s.]?[0-9]{1,9}$/;
   //validate valid phone nember and real id number
@@ -160,7 +162,7 @@ const s_register_user = async (userID, phoneNumber, startDate) => {
   }
 
   const st_date = new Date(startDate);
-  const newUser = new Experimenter({ userID, phoneNumber, startDate: st_date });
+  const newUser = new Experimenter({ userID, phoneNumber, startDate: st_date, protocolType });
   await newUser.save();
   return { status: 200 };
 };
