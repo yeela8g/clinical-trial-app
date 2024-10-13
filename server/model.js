@@ -23,6 +23,10 @@ const Experimenter = new Schema({
     type: Boolean,
     default: false,
   },
+  protocolType: { // 'v1' או 'safety'
+    type: String,
+    required: true
+  }, 
 });
 
 module.exports = {
