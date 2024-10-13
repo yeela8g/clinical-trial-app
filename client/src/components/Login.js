@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, setUserPhoneNumber }) {
+function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, setUserPhoneNumber, setProtocolType }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
@@ -17,7 +17,9 @@ function Login({ setIsLoggedIn, setIsAdmin, userID, setUserID, userPhoneNumber, 
       setIsAdmin(data.isAdmin);
       setUserID(data.userID);
       setUserPhoneNumber(data.phoneNumber);
-    } else if (data.status === 203) {
+      setProtocolType(data.protocolType);
+    }
+    else if (data.status === 203) {
       alert('הניסוי טרם התחיל עבור נסיין זה');
       setUserID("");
       setUserPhoneNumber("");
