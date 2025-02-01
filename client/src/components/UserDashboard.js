@@ -60,7 +60,7 @@ function UserDashboard({ userID, handleLogout, protocolType }) {
       
       <div className="bg-gray-300 p-6 sm:p-8 rounded border border-gray-400 shadow-md w-full max-w-lg mt-16 md:mt-24 lg:mt-32 relative">
         <p className="absolute top-2 left-3 text-md text-gray-700 font-semibold">
-            {`User ID: ${userID}`}
+            {`${userID} :קוד אישי`}
         </p>
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-4 text-blue-900 text-center">
           {`שלום לך`}
