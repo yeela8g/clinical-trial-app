@@ -83,7 +83,7 @@ function AdminDashboard({ userID, handleLogout }) {
               onChange={(e) => setProtocolType(e.target.value)}
               required
             >
-              <option value="v1">V1</option>
+              <option value="v1">WPMDE2-V1</option>
               <option value="safety">Safety</option>
             </select>
 
