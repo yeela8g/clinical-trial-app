@@ -63,7 +63,7 @@ function UserDashboard({ userID, handleLogout, protocolType }) {
             {`${userID} :קוד אישי`}
         </p>
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-4 text-blue-900 text-center">
-          {`שלום לך`}
+           {`! שלום לך`}
         </h1>
         <h2 className="text-lg font-bold mb-2 text-blue-900 text-center">
           <span className="border-b border-gray-50 border-dashed">: משימות יומיות</span>
