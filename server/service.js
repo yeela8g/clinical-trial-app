@@ -30,7 +30,7 @@ const sendEmailReport = async (users) => {
         }`
     )
     .join('\n');
-const recipients = process.env.recipient.split(","); 
+const recipients = process.env.recipients.split(","); 
 
   // Send the email
   await transporter.sendMail({
@@ -77,7 +77,7 @@ const resetCompletedTasks = async () => {
   }
 };
 
-cron.schedule("15 16 * * *", resetCompletedTasks);
+cron.schedule("23 16 * * *", resetCompletedTasks);
 
 
 const formatPhoneNumberToE164 = (phoneNumber) => {
