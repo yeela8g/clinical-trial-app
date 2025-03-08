@@ -77,7 +77,7 @@ const resetCompletedTasks = async () => {
   }
 };
 
-cron.schedule("23 16 * * *", resetCompletedTasks);
+cron.schedule("00 00 * * *", resetCompletedTasks);
 
 
 const formatPhoneNumberToE164 = (phoneNumber) => {
