@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+
 // Function to send report email to the clinical trial manager
 const sendEmailReport = async (users) => {
   // Generate the email content
@@ -29,10 +30,11 @@ const sendEmailReport = async (users) => {
         }`
     )
     .join('\n');
+const recipients = process.env.recipient.split(","); 
 
   // Send the email
   await transporter.sendMail({
-    to:  `${ process.env.recipient }`, // Recipient address
+    to:  recipients, // Recipients address
     subject: 'Daily Tasks Completion Report', // Subject line
     text: `Daily Report of Tasks Completion:\n\n${emailContent}`, // Plain text body
   });
@@ -75,7 +77,7 @@ const resetCompletedTasks = async () => {
   }
 };
 
-cron.schedule("00 07 * * *", resetCompletedTasks);
+cron.schedule("10 18 * * *", resetCompletedTasks);
 
 
 const formatPhoneNumberToE164 = (phoneNumber) => {
